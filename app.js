@@ -1,17 +1,13 @@
-const http = require('http');
 const express = require('express');
+
+const shopRoutes = require('./routes/shop.js');
 
 const app = express();
 
-app.use((req, res, next) => {
-  console.log('in the middleware');
-  next();
-});
+app.use(shopRoutes);
 
 app.use((req, res, next) => {
-  res.send('<h1>hello</h1>');
+  res.status(404).send('<p>Page not found</p>');
 });
 
-const server = http.createServer(app);
-
-server.listen(3000);
+app.listen(3000);
